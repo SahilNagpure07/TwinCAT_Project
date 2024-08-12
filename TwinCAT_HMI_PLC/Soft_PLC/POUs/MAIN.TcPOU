@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.13">
+  <POU Name="MAIN" Id="{f71e8fc5-8849-408d-ba5b-2c650398fb9f}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	bRun_Process : BOOL;
+	bStop_process : BOOL;
+	bProcess_Status : BOOL;
+	tProcess_Duration : TIME;
+	fbProcess_Timer : TON;
+	bTimer_Done : BOOL;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//bProcess_Status := bRun_Process;
+
+fbProcess_Timer(IN:= bProcess_Status, PT:= tProcess_Duration, Q=> bTimer_Done, ET=> );
+
+
+IF bRun_Process THEN
+	bProcess_Status := TRUE;
+END_IF
+
+IF bStop_Process OR bTimer_Done THEN
+	bProcess_Status := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+      <LineId Id="27" Count="3" />
+      <LineId Id="10" Count="2" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
